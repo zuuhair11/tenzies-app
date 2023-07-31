@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# Tenzies: A Dice-Rolling Game with React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+Welcome to Tenzies, a thrilling dice-rolling game built using React! The objective of the game is simple yet addictive - roll a set of dice until they all show the same value. But watch out, your fate lies in your hands as you can strategically freeze certain dice between rolls to increase your chances of winning. Get ready for some heart-pounding fun!
 
-In the project directory, you can run:
+## Technologies Used
 
-### `npm start`
+Tenzies is built using the following technologies and libraries:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React: A popular JavaScript library for building user interfaces.
+- nanoid: A small library used to generate unique IDs for the dice.
+- react-use: A library that provides useful hooks for React.
+- react-confetti: A fun library for adding confetti animations.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## How to Play
 
-### `npm test`
+1. **Getting Started**: When you launch the game, you'll be greeted by ten dice, each displaying a random value between 1 and 6.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Rolling the Dice**: Click on the **Roll** button to begin the game. The dice will roll, and new random values will be displayed.
 
-### `npm run build`
+3. **Holding the Dice**: After each roll, you have the power to influence the outcome. Click on any die to toggle its hold status. Held dice will retain their value and won't be re-rolled in the next round.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. **Rolling Again**: Click the **Roll** button to roll the remaining dice that were not held.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+5. **Victory Conditions**: Keep rolling and holding until all the dice show the same value. When that happens, congratulations, you win the game!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+6. **Starting a New Game**: After you've achieved the perfect match, a **New Game** button will appear. Click it to start a fresh round of Tenzies.
 
-### `npm run eject`
+## How it Works
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+The Tenzies game is powered by React and takes advantage of React hooks to manage state and handle user interactions. Here are the main components and functions that drive the game:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 1. Dice Component
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The `Die` component renders individual dice on the screen. Each die receives its value and hold status as props and allows players to click on it to toggle its hold status. The `handleHoldDice` function is called when a player clicks on a die to freeze or unfreeze it.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 2. App Component
 
-## Learn More
+The `App` component is the core of the game. It sets up the game's state using React's `useState` hook, which includes an array of dice objects. Each object contains the following properties: `value` (the current number on the die), `isHeld` (whether the die is frozen), and `id` (a unique identifier for each die).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The game logic is implemented through various functions within the `App` component:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `generateNewDie()`: Generates a new die object with a random value between 1 and 6 and a unique ID using `nanoid`.
 
-### Code Splitting
+- `allNewDice()`: Generates an array of ten dice objects using `generateNewDie()`. It is used to initialize the game state and to reset the dice when the player starts a new game.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- `rollDice()`: Called when the player clicks the **Roll** button. If no dice are frozen (`tenzies` is false), it generates new values for all non-held dice. If all dice are held (`tenzies` is true), the function resets the game by calling `allNewDice()`.
 
-### Analyzing the Bundle Size
+- `holdDice(id)`: Called when a player clicks on a die. It toggles the `isHeld` property of the corresponding die object, freezing or unfreezing it.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- `useEffect()`: Checks if all dice are held after each roll. If all dice are held, it checks if they all have the same value. If so, it sets the `tenzies` state to true, indicating the player has won.
 
-### Making a Progressive Web App
+### 3. Confetti Animation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The `react-confetti` library adds a touch of celebration when the player wins the game. When `tenzies` is true (indicating a win), confetti is displayed on the screen, creating a fun visual effect.
 
-### Advanced Configuration
+## Conclusion
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+We hope you enjoy playing Tenzies as much as we enjoyed building it! The game combines elements of chance and strategy to keep players engaged and entertained. Feel free to explore the code on [GitHub](https://github.com/zuuhair11/tenzies) and customize the game to your liking. If you have any feedback or suggestions, we'd love to hear them.
 
-### Deployment
+Get ready to roll the dice and experience the thrill of Tenzies!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Best regards,
+Zouhair

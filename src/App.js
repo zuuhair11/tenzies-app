@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid' ;
+import { useEffect, useState } from 'react' ;
 import { useWindowSize } from 'react-use' ;
 import Confetti from 'react-confetti' ;
-import { useEffect, useState } from 'react' ;
 import Die from './components/Die' ;
 
 
